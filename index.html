@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuckle Dev Verification Gate</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        /* CHUCKLE GAMES STUDIO CINEMATIC NEON THEME */
+        :root {
+            --bg-color: #030611; 
+            --bg-color-2: #090d22;
+            --text-color: #f8fafc; 
+            --text-muted: #94a3b8;
+            --link-color: #00d9ff; 
+            --purple: #8b5cf6;
+            --blue: #00d9ff; 
+            --orange: #ff7b00; 
+            --yellow: #ffd000;
+            --glow-cyan: 0 0 10px rgba(0, 217, 255, 0.6), 0 0 20px rgba(0, 217, 255, 0.3);
+            --glass: rgba(255, 255, 255, 0.03); 
+            --border: rgba(255, 255, 255, 0.06);
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--bg-color), var(--bg-color-2));
+            color: var(--text-color); 
+            min-height: 100vh;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 40px 20px;
+        }
+        
+        .card {
+            background: var(--glass); 
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border); 
+            border-radius: 20px;
+            padding: 40px; 
+            width: 100%; 
+            max-width: 650px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 2rem;
+            background: linear-gradient(90deg, #fff, var(--blue), var(--purple));
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px; 
+            text-align: center;
+        }
+        
+        p { 
+            color: var(--text-muted); 
+            line-height: 1.6; 
+            margin-bottom: 20px; 
+        }
+        
+        .input-group { 
+            margin-bottom: 25px; 
+        }
+        
+        label h3 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.1rem; 
+            color: #fff; 
+            margin-bottom: 15px; 
+            line-height: 1.4;
+        }
+        
+        input[type="text"] {
+            width: 100%; 
+            padding: 14px; 
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            color: #fff; 
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        
+        input[type="text"]:focus { 
+            border-color: var(--blue); 
+            outline: none; 
+            box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+        }
+        
+        .engine-btn {
+            display: block; 
+            width: 100%; 
+            padding: 15px; 
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid var(--border);
+            border-radius: 10px; 
+            color: #fff; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            text-align: left; 
+            transition: 0.3s;
+        }
+        
+        .engine-btn:hover { 
+            border-color: var(--blue); 
+            background: rgba(0, 217, 255, 0.05); 
+            text-shadow: var(--glow-cyan); 
+        }
+        
+        .option-container {
+            display: block; 
+            position: relative; 
+            padding: 14px 14px 14px 44px; 
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.01); 
+            border: 1px solid var(--border); 
+            border-radius: 8px;
+            cursor: pointer; 
+            color: var(--text-muted); 
+            transition: 0.2s;
+            line-height: 1.4;
+        }
+        
+        .option-container:hover { 
+            border-color: rgba(255,255,255,0.2); 
+            color: #fff; 
+        }
+        
+        .option-container input { 
+            position: absolute; 
+            opacity: 0; 
+            cursor: pointer; 
+        }
+        
+        .checkmark {
+            position: absolute; 
+            top: 50%; 
+            left: 16px; 
+            transform: translateY(-50%);
+            height: 16px; 
+            width: 16px; 
+            background-color: transparent;
+            border: 2px solid var(--text-muted); 
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        
+        .option-container input:checked ~ .checkmark { 
+            background-color: var(--blue); 
+            border-color: var(--blue); 
+            box-shadow: 0 0 8px var(--blue);
+        }
+        
+        .option-container input:checked ~ .checkmark::after {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #030611;
+        }
+        
+        .btn {
+            width: 100%; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif; 
+            font-weight: 900; 
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--orange), var(--yellow)); 
+            color: #030611;
+            cursor: pointer; 
+            margin-top: 20px; 
+            box-shadow: 0 0 20px rgba(255, 123, 0, 0.3); 
+            transition: 0.3s;
+        }
+        
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 0 30px rgba(255, 123, 0, 0.5); 
+        }
+        
+        .hidden { 
+            display: none; 
+        }
+        
+        .step-indicator { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 0.85rem; 
+            color: var(--blue); 
+            float: right; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="quiz-wrapper">
+    <!-- STEP 1: IDENTITY -->
+    <div id="step-identity">
+        <h2 class="section-title">CHUCKLE LABS GATE</h2>
+        <p>Enter your exact Discord username below to initiate the developer verification routing protocol.</p>
+        <div class="input-group">
+            <input type="text" id="discord-username" placeholder="e.g., gamedev_pro" autocomplete="off">
+        </div>
+        <button class="btn" onclick="nextStep('identity')">PROCEED</button>
+    </div>
+
+    <!-- STEP 2: ENGINE BRANCHING -->
+    <div id="step-engine" class="hidden">
+        <h2 class="section-title">SELECT ENGINE</h2>
+        <p>Choose your native system environment. Your technical quiz parameters will balance dynamically based on your architecture selection.</p>
+        <button class="engine-btn" onclick="selectEngine('unity')">🟢 UNITY PIPELINE</button>
+        <button class="engine-btn" onclick="selectEngine('unreal')">🔵 UNREAL ENGINE ARCHEPLAY</button>
+        <button class="engine-btn" onclick="selectEngine('godot')">🟠 GODOT NODE GRAPH</button>
+    </div>
+
+    <!-- STEP 3: DYNAMIC RUNTIME MCQ GENERATOR -->
+    <div id="step-questions" class="hidden">
+        <span class="step-indicator" id="progress-text">Q: 1/10</span>
+        <h2 class="section-title" id="quiz-title">TECHNICAL EVALUATION</h2>
+        <div id="question-render-space"></div>
+        <button class="btn" onclick="processAnswer()">SUBMIT ANSWER</button>
+    </div>
+</div>
+
+<script>
+    // TECHNICAL MCQ DATABASE FOR EACH PIPELINE
+    const database = {
+        unity: [
+            { q: "Which Unity render pipeline should be selected to maximize graphical realism using volumetric fog and real-time ray tracing?", o: ["Universal Render Pipeline (URP)", "High Definition Render Pipeline (HDRP)", "Standard Built-in Render Pipeline", "Canvas Vector Render Pipeline"], a: 1 },
+            { q: "What is the precise purpose of baking an 'Emissive Map' in a Unity material workflow?", o: ["It tells the physics engine how slippery a 3D surface is.", "It defines the metallic properties and surface roughness of a mesh.", "It contains color and light intensity values that allow a material to appear as a self-illuminated light source.", "It unwraps the 2D vector coordinates to prevent texture stretching."], a: 2 },
+            { q: "When optimizing a 3D game in Unity, what tool should you open to inspect deep CPU performance spikes, script execution times, and garbage collection overhead?", o: ["The Lighting Settings Tab", "The Inspector Window", "The Unity Profiler", "The Hierarchy Window"], a: 2 },
+            { q: "What does the 'Occlusion Culling' system do in a Unity 3D scene view?", o: ["It automatically scales down texture resolutions based on player distance.", "It disables the rendering of 3D objects that are completely hidden behind other solid objects from the camera's view.", "It merges multiple text files into a single master data stream.", "It forces all audio files to play in a strict 2D space."], a: 1 },
+            { q: "In Unity's physics engine, what is the main architectural difference between a 'Collider' and a 'Rigidbody'?", o: ["A Collider calculates memory distribution, while a Rigidbody tracks 3D vertex data.", "A Collider makes an object invisible, while a Rigidbody gives it an official 3D material.", "A Collider defines the physical shape for collision boundaries, while a Rigidbody allows the object to react to gravity and physics forces.", "They are the exact same component under different legacy names."], a: 2 },
+            { q: "What is the fundamental lifecycle execution difference between Awake() and Start() in a MonoBehaviour script?", o: ["Awake() loops continuously every frame, whereas Start() triggers once an hour.", "Awake() runs immediately when the script instance is initialized (even if the component is disabled), while Start() runs just before the first frame update only if the script is enabled.", "Awake() handles network multiplayer packets, while Start() compiles UI graphics.", "Awake() cannot access variable memory, while Start() can."], a: 1 },
+            { q: "Why should frame-rate independent physics calculations (like adding a continuous force to a Rigidbody) be written inside FixedUpdate() instead of Update()?", o: ["Update() runs on a separate GPU thread, which will instantly crash physics simulations.", "FixedUpdate() runs on a reliable, fixed-interval timer independent of game frame rates, preventing physics bugs on slower or faster computers.", "FixedUpdate() automatically compresses audio assets in real-time.", "Update() doesn't allow the use of mathematical integers or floats."], a: 1 },
+            { q: "In Unity C#, what does a 'NullReferenceException' error explicitly mean?", o: ["Your graphics card has run out of VRAM to load textures.", "A script is looping infinitely and locking up the main CPU thread.", "Your code is attempting to access or manipulate a variable/object reference that points to nothing and has not been assigned in memory.", "The project file was saved in an older version of the engine."], a: 2 },
+            { q: "What is the main structural benefit of using a C# 'Coroutine' (StartCoroutine) over standard methods?", o: ["It forces the entire game engine to pause until a mathematical formula finishes.", "It converts script files directly into optimized C++ binary assets.", "It allows you to pause script execution and yield control back to Unity, resuming it across multiple frames without locking up the game.", "It bypasses the need to write classes or namespaces."], a: 2 },
+            { q: "What does the keyword 'Time.deltaTime' represent when multiplied by a movement vector in an Update() loop?", o: ["The total amount of milliseconds the player has been playing the game.", "The amount of time in seconds that passed between the current frame and the previous frame, making movement consistent regardless of framerate.", "The designated internal clock speed of the user's local CPU processor.", "The delay time required before a destroyed game object is wiped from memory."] }
+        ],
+        unreal: [
+            { q: "In Unreal Engine, what is the primary role of the 'GameModeBase' class?", o: ["It stores the 3D collision models for landscape generation.", "It defines the foundational rules of the game, including player spawning, win conditions, and which default classes (HUD, PlayerController) to use.", "It acts as the primary master material blueprint for ray-traced shadows.", "It compiles texture maps into optimized runtime assets."], a: 1 },
+            { q: "What is Unreal Engine's 'Nanite' virtualization geometry technology designed to achieve?", o: ["It dynamically compresses multi-channel audio tracks into spatialized mono streams.", "It automates multiplayer server matchmaking systems.", "It allows games to render movie-quality 3D source models with millions of polygons in real-time without traditional performance loss.", "It structures the UI animation sequencing inside widget frameworks."], a: 2 },
+            { q: "What is the architectural purpose of an Unreal Engine 'Level Instance'?", o: ["It serves as an archive folder for deleting old asset packages safely.", "It allows a developer to pack a group of actors together into a reusable sub-level template that can be duplicated across a massive map.", "It calculates the local UI rendering matrix for mobile deployment.", "It acts as a primary network server configuration profile."], a: 1 },
+            { q: "What does the 'Lumen' feature in Unreal Engine handle automatically?", o: ["Script compiling pipelines between C++ and Blueprints.", "Skeletal mesh bone rigging and asset skinning weights.", "Fully dynamic global illumination and high-fidelity real-time light reflections.", "Player save-data state serialization."], a: 2 },
+            { q: "In Unreal Engine's asset pipeline, what happens during the 'Cooking' process?", o: ["It automatically increases the resolution of imported 2D textures.", "It strips away development-only data and converts assets into highly optimized, platform-specific formats ready for deployment (PC, Console, etc.).", "It records player input history to generate a developer testing log.", "It renders high-resolution marketing screenshots directly to your desktop."], a: 1 },
+            { q: "In Unreal Blueprints, what is the fundamental difference between a 'Pure' function node and an 'Impure' (Executable) function node?", o: ["Pure functions can only be accessed by C++ code modules.", "Pure functions do not alter state data and lack white execution pins, simply calculating and returning a value on demand.", "Impure functions immediately wipe the data cache every time they run.", "Pure functions are used exclusively for editing 3D vector textures."], a: 1 },
+            { q: "What is the primary coding purpose of a 'PlayerController' class in an Unreal programming framework?", o: ["It directly controls the physics simulation calculations of terrain maps.", "It acts as the interface between the human player and the physical Pawn/Character actor, translating inputs into actual game behavior.", "It manages the audio mixing layout for ambient sound design.", "It controls memory allocations inside the GPU graphics driver."], a: 1 },
+            { q: "When working with variables in Blueprints, what does checking the 'Instance Editable' (Eye Icon) setting accomplish?", o: ["It makes the variable completely immutable so its value can never be edited.", "It exposes the variable to the details panel, allowing you to give unique values to different copies of that actor placed directly in the world.", "It converts the variable value into an automated 3D text actor.", "It syncs the variable across cloud servers for multiplayer functionality."], a: 1 },
+            { q: "In Unreal C++ programming, what is the explicit purpose of placing the UPROPERTY(EditAnywhere, BlueprintReadWrite) macro above a variable declaration?", o: ["It tells the operating system to allocate hardware threads specifically to that single float.", "It converts the C++ class directly into an offline database file.", "It exposes that specific C++ variable to the Unreal Editor details panel and allows Blueprint graphs to read and write data to it.", "It permanently locks the script file down to prevent editing."], a: 2 },
+            { q: "What does a 'Cast To [Class]' node do in an Unreal Blueprint graph?", o: ["It throws a physical trace line forward to detect world collision boundaries.", "It checks if a generic object reference is a specific, expected class type, allowing the script to access that specific class's unique variables and functions.", "It converts a 2D interface layout into a 3D structural model.", "It automatically scales up the game resolution using AI technology."] }
+        ],
+        godot: [
+            { q: "What is the foundational design philosophy of Godot’s architectural hierarchy layout?", o: ["An array-based asset library controlled by a single text script.", "A deeply nested system of Scenes and Nodes arranged in a tree structure, where everything is a specialized Node.", "A component-based setup where files are managed entirely by an external database.", "A system where 3D meshes and rendering channels are completely isolated from code scripts."], a: 1 },
+            { q: "In Godot's 3D engine workflow, what is the exact function of a 'GridMap' node?", o: ["It maps out audio channel tracking zones inside a game's UI layout.", "It tracks performance profiles and lists processing errors in real-time.", "It allows developers to paint 3D levels dynamically using a grid system and a pre-made library of 3D mesh building tiles.", "It handles multiplayer peer-to-peer networking connectivity maps."], a: 2 },
+            { q: "What does changing the 'Transform' property of a Spatial/Node3D object modify in Godot?", o: ["The physical mass values and material friction profiles.", "The object’s 3D Position, Rotation, and Scale data relative to its parent node.", "The internal resolution scaling factors of the user's monitor view.", "The script execution order priority layers."], a: 1 },
+            { q: "What is the core function of a 'ViewPort' node inside a Godot project tree?", o: ["It acts as an archival folder for saving game project backups.", "It handles physics collision tracking profiles exclusively.", "It creates an independent rendering surface that acts as a window to display 2D or 3D content, allowing splitscreen or mini-maps.", "It reads incoming user input signals from gamepads and keyboards."], a: 2 },
+            { q: "How does Godot’s 'Project Settings > Input Map' architecture benefit gameplay loop design?", o: ["It calculates optimal CPU thread allocation for performance boosts.", "It allows developers to define abstract action profiles (e.g., 'jump') and bind them to multiple physical keys/controllers simultaneously.", "It saves player achievement statistics to local user files.", "It converts 3D particle systems into standard 2D user interfaces."], a: 1 },
+            { q: "What is the exact purpose of the built-in virtual function _ready() in a GDScript file?", o: ["It runs continuously inside the physics step loop.", "It triggers exactly once when the specific node and all of its immediate children have fully entered the active scene tree.", "It automatically formats text data strings into numerical float objects.", "It deletes unused asset classes from the computer's hard drive space."], a: 1 },
+            { q: "Why should continuous movement, velocity alterations, and collision logic be written inside _physics_process(delta) instead of _process(delta)?", o: ["_process(delta) does not support the use of vectors or basic numbers.", "_physics_process(delta) syncs to a uniform, reliable physics frame execution timer, preventing erratic physics glitches at varying frame rates.", "_process(delta) is completely hidden from the script compiler pipeline.", "_physics_process(delta) runs on a remote cloud server automatically."], a: 1 },
+            { q: "In Godot GDScript, what is the architecture and purpose of 'Signals'?", o: ["They are hardware diagnostic tools used to monitor CPU temperature spikes.", "They are encrypted text packets used for safe multiplayer server saving.", "They are Godot’s implementation of the observer pattern, allowing nodes to emit events that other nodes can listen to without being tightly coupled.", "They force user interfaces to scale down cleanly on mobile screens."], a: 2 },
+            { q: "What does the @onready keyword mean when placed right before a variable declaration in GDScript?", o: ["The variable value is locked down permanently and can never be changed.", "It delays the initialization of the variable until the node enters the scene tree and its children are ready, making safe get_node() paths possible.", "It flags the variable to be compiled by an external C++ module.", "It makes the variable accessible only by the UI canvas layering systems."], a: 1 },
+            { q: "What occurs in code memory when you call the queue_free() method on a Godot node object?", o: ["The node is paused instantly but kept in system memory forever.", "The node is safely marked for destruction, clearing it and all its children out of active memory at the end of the current frame loop.", "The node creates a duplicate instance of itself in a random 3D space vector.", "It completely resets the entire game scene back to its startup values."] }
+        ]
+    };
+
+    let userDetails = { username: "", engine: "" };
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function nextStep(current) {
+        if (current === 'identity') {
+            const nameInput = document.getElementById('discord-username').value.trim();
+            if (!nameInput) { alert("Please input your actual Discord username."); return; }
+            userDetails.username = nameInput;
+            document.getElementById('step-identity').classList.add('hidden');
+            document.getElementById('step-engine').classList.remove('hidden');
+        }
+    }
+
+    function selectEngine(engineName) {
+        userDetails.engine = engineName;
+        document.getElementById('step-engine').classList.add('hidden');
+        document.getElementById('step-questions').classList.remove('hidden');
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const questionsList = database[userDetails.engine];
+        if (currentQuestionIndex >= questionsList.length) {
+            evaluateFinalResults();
+            return;
+        }
+        
+        document.getElementById('progress-text').innerText = `Q: ${currentQuestionIndex + 1}/${questionsList.length}`;
+        const data = questionsList[currentQuestionIndex];
+        let html = `<label><h3>${data.q}</h3></label><div style='margin-top:15px;'>`;
+        
+        data.o.forEach((option, index) => {
+            html += `
+                <label class="option-container">${option}
+                    <input type="radio" name="quiz-opt" value="${index}">
+                    <span class="checkmark"></span>
+                </label>
+            `;
+        });
+        html += "</div>";
+        document.getElementById('question-render-space').innerHTML = html;
+    }
+
+    function processAnswer() {
+        const selected = document.querySelector('input[name="quiz-opt"]:checked');
+        if (!selected) { alert("Please select an answer to progress."); return; }
+        
+        const answerIndex = parseInt(selected.value);
+        const correctIndex = database[userDetails.engine][currentQuestionIndex].a;
+        
+        if (answerIndex === correctIndex) { score++; }
+        
+        currentQuestionIndex++;
+        renderQuestion();
+    }
+
+    function evaluateFinalResults() {
+        const box = document.getElementById('quiz-wrapper');
+        const passTarget = 6; // UPDATED PASSING SCORE SYSTEM SET AT 6/10
+        
+        if (score >= passTarget) {
+            box.innerHTML = `
+                <h2 class="section-title" style="background: linear-gradient(90deg, #00ffcc, #00d9ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(0,255,200,0.4));">VERIFICATION PASSED</h2>
+                <p>Congratulations <strong>${userDetails.username}</strong>. You successfully scored <strong>${score}/10</strong> inside the <strong>${userDetails.engine.toUpperCase()}</strong> pipeline track.</p>
+                <p style="color: var(--blue);">Our administration logs have registered your information. Your access authorization parameters will sync to your Discord profile shortly.</p>
+            `;
+        } else {
+            box.innerHTML = `
+                <h2 class="section-title" style="background: linear-gradient(90deg, var(--orange), #ff0055); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,100,0,0.4));">ACCESS DENIED</h2>
+                <p>Verification failed. Your assessment score of <strong>${score}/10</strong> falls below our community benchmark requirement (6/10).</p>
+                <p>Ensure your design and development foundations meet Chuckle Games Studio engineering standards before attempting validation again.</p>
+            `;
+        }
+    }
+</script>
+</body>
+</html>
