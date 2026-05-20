@@ -23,7 +23,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-    font-family:Inter;
+    font-family:Inter, sans-serif;
     background:linear-gradient(180deg,var(--bg-color),var(--bg-color-2));
     color:var(--text);
     min-height:100vh;
@@ -41,74 +41,118 @@ body{
     backdrop-filter:blur(15px);
     border-radius:18px;
     padding:35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
 .section-title{
-    font-family:Orbitron;
+    font-family:Orbitron, sans-serif;
     text-align:center;
     font-size:2rem;
     margin-bottom:20px;
     background:linear-gradient(90deg,#fff,var(--blue),#8b5cf6);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    letter-spacing: 2px;
 }
 
 p{color:var(--muted);line-height:1.6;margin-bottom:15px;}
 
 .highlight-box{
     border-left:3px solid var(--blue);
-    padding:12px;
-    background:rgba(0,217,255,0.05);
-    margin-bottom:15px;
+    padding:15px;
+    background:rgba(0,217,255,0.03);
+    margin-bottom:20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.highlight-box p {
+    margin-bottom: 0;
+    color: #cbd5e1;
+}
+
+label h3 {
+    font-family: Orbitron, sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 12px;
 }
 
 input{
     width:100%;
-    padding:12px;
-    background:rgba(0,0,0,0.3);
+    padding:14px;
+    background:rgba(0,0,0,0.4);
     border:1px solid var(--border);
     border-radius:8px;
     color:white;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: var(--blue);
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
 }
 
 button{
     width:100%;
-    padding:14px;
+    padding:16px;
     border:none;
     border-radius:10px;
-    font-family:Orbitron;
+    font-family:Orbitron, sans-serif;
     cursor:pointer;
     margin-top:10px;
     transition:0.3s;
+    letter-spacing: 1px;
 }
 
 .btn{
     background:linear-gradient(135deg,var(--orange),var(--yellow));
-    color:black;
+    color:#030611;
     font-weight:900;
 }
 
-.btn:hover{transform:translateY(-2px);}
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,123,0,0.3);
+}
 
 .engine-btn{
     background:rgba(255,255,255,0.02);
     border:1px solid var(--border);
     color:white;
     text-align:left;
+    padding: 18px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
 }
 
 .engine-btn:hover{
     border-color:var(--blue);
     color:var(--blue);
+    background: rgba(0,217,255,0.05);
+    transform: translateX(5px);
 }
 
 .option{
     display:block;
-    padding:12px;
-    margin:8px 0;
+    padding:14px;
+    margin:10px 0;
     border:1px solid var(--border);
     border-radius:8px;
     cursor:pointer;
+    background: rgba(255,255,255,0.01);
+    transition: 0.2s;
+}
+
+.option:hover{
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.03);
+}
+
+.option input {
+    width: auto;
+    margin-right: 10px;
 }
 
 .hidden{display:none;}
@@ -116,6 +160,14 @@ button{
 .step-indicator{
     float:right;
     color:var(--blue);
+    font-family: Orbitron, sans-serif;
+    font-weight: bold;
+}
+
+#qbox h3 {
+    margin-bottom: 15px;
+    font-size: 1.15rem;
+    line-height: 1.5;
 }
 </style>
 </head>
@@ -124,38 +176,45 @@ button{
 
 <div class="card" id="quiz-wrapper">
 
-<!-- STEP 1 -->
+<!-- STEP 1: OBJECTIVE & INTRO -->
 <div id="step-identity">
 <h2 class="section-title">CHUCKLE GATE</h2>
 
-<p>Developer verification system for game creators.</p>
+<p>Welcome to the <b>Chuckle Games Studio</b> ecosystem entry portal. This gateway is designed to cultivate a high-caliber development space dedicated entirely to serious game creators, technical programmers, and digital artists.</p>
 
 <div class="highlight-box">
-<p><b>Goal:</b> Test engine knowledge and skill level.</p>
+<p><b>🎯 OUR MISSION GOAL:</b><br>
+We are intentionally establishing a spam-free, production-focused environment. This network serves to foster engineering pipelines, exchange deep technical insights, hold structured review feedback loops, and collaborate on advanced indie title development.</p>
 </div>
 
-<input id="username" placeholder="Discord username">
+<p>To secure your access roles inside the Discord server architecture, you must clear a dynamic runtime questionnaire covering your core game engine workspace. A minimum passing metric of <b>6/10 (60%)</b> is required to validate development literacy.</p>
 
-<button class="btn" onclick="nextStep()">PROCEED</button>
+<div style="margin-top: 25px; margin-bottom: 15px;">
+    <label for="username"><h3>VERIFY IDENTITY</h3></label>
+    <input id="username" placeholder="Enter your precise Discord username..." autocomplete="off">
 </div>
 
-<!-- STEP 2 -->
+<button class="btn" onclick="nextStep()">PROCEED TO PIPELINE SELECTION</button>
+</div>
+
+<!-- STEP 2: ENGINE SELECTION -->
 <div id="step-engine" class="hidden">
-<h2 class="section-title">SELECT ENGINE</h2>
+<h2 class="section-title">CHOOSE FIRMWARE</h2>
+<p style="text-align: center; margin-bottom: 25px;">Select your native engine environment. Your assessment parameters will calibrate dynamically to evaluate operations within this ecosystem.</p>
 
-<button class="engine-btn" onclick="selectEngine('unity')">Unity</button>
-<button class="engine-btn" onclick="selectEngine('unreal')">Unreal</button>
-<button class="engine-btn" onclick="selectEngine('godot')">Godot</button>
+<button class="engine-btn" onclick="selectEngine('unity')">⚡ UNITY RENDER PIPELINE</button>
+<button class="engine-btn" onclick="selectEngine('unreal')">💥 UNREAL ENGINE VIRTUALIZATION</button>
+<button class="engine-btn" onclick="selectEngine('godot')">🤖 GODOT ENGINE ARCHITECTURE</button>
 </div>
 
-<!-- STEP 3 -->
+<!-- STEP 3: RUNTIME ASSESSMENT -->
 <div id="step-questions" class="hidden">
 <span class="step-indicator" id="progress"></span>
-<h2 class="section-title">QUIZ</h2>
+<h2 class="section-title">EVALUATION</h2>
 
 <div id="qbox"></div>
 
-<button class="btn" onclick="submit()">SUBMIT</button>
+<button class="btn" onclick="submit()">SUBMIT LAYER DATA</button>
 </div>
 
 </div>
@@ -164,40 +223,40 @@ button{
 
 const db = {
 unity:[
-{q:"Best render pipeline?",o:["URP","HDRP","Built-in","2D"],a:1},
-{q:"Profiler used for?",o:["Audio","Performance","UI","Input"],a:1},
-{q:"Time.deltaTime means?",o:["Frame time","CPU","GPU","Memory"],a:0},
-{q:"Collider vs Rigidbody?",o:["Same","Physics vs shape","Audio","UI"],a:1},
-{q:"Awake vs Start?",o:["Same","Init timing difference","GPU","None"],a:1},
-{q:"Coroutine does?",o:["Freeze","Multi-frame execution","Delete","Compile"],a:1},
-{q:"FixedUpdate used for?",o:["UI","Physics","Audio","Shaders"],a:1},
-{q:"NullReference means?",o:["Missing object","GPU error","Crash","Input"],a:0},
-{q:"Occlusion culling?",o:["Hide unseen objects","Lighting","Audio","UI"],a:0},
-{q:"DeltaTime purpose?",o:["Frame consistency","Speed","Memory","Texture"],a:0}
+{q:"Which rendering pipeline must be leveraged in Unity to process high-end cinematic realism, native real-time ray tracing, and volumetric layer metrics?",o:["Universal Render Pipeline (URP)","High Definition Render Pipeline (HDRP)","Standard Legacy Built-in Pipeline","Canvas Vector Shader Pipeline"],a:1},
+{q:"What is the explicit design utility of baking an 'Emissive Map' within a Unity material asset shader structure?",o:["To pass surface roughness coefficients directly to screen space reflections.","To store rgb illumination channels that make the surface display as an independent light source.","To unwrap geometric vector arrays and prevent procedural texturing seams.","To register physical friction values for context-dependent surface interaction."],a:1},
+{q:"You observe deep runtime frame drops and heavy execution spikes inside your project. Which system utility should be deployed to map Garbage Collection allocations and component overhead?",o:["The Global Lighting Ambient Panel","The Project Hierarchy Hierarchy Window","The Unity CPU/Memory Profiler Matrix","The Material Inspector Property Tab"],a:2},
+{q:"What structural optimization function does 'Occlusion Culling' natively handle in a complex 3D scene view?",o:["It downscales texture mipmaps dynamically relative to screen view resolution.","It updates physics interaction bounds inside a fixed time loop layout.","It disables rendering logic for meshes completely hidden behind foreground geometry from the perspective of the camera clip.","It converts stereoscopic audio outputs into single-channel monaural tracks."],a:2},
+{q:"What is the absolute architectural distinction between a Collider and a Rigidbody component in Unity?",o:["The Collider contains memory maps, while the Rigidbody contains texture layouts.","The Collider handles the geometric boundaries of physical impact, while the Rigidbody hooks the object into the structural gravity simulation engine.","The Collider modifies shader passes, while the Rigidbody manages network states.","They share identical runtime classes and are simply named differently for asset sorting."],a:1},
+{q:"What is the functional initialization order difference between Awake() and Start() lifecycle events?",o:["Awake() updates every frame, while Start() updates once per asset lifetime.","Awake() processes data immediately when the script instance loads regardless of component status, while Start() updates right before the initial frame tick only if the script component is active.","Awake() processes rendering updates, while Start() executes audio compilation parameters.","Awake() cannot call variables out of local memory arrays, while Start() can."],a:1},
+{q:"Why must frame-rate independent physics alterations (such as applying continuous velocity transformations) be handled inside FixedUpdate() instead of Update()?",o:["Update() blocks GPU rendering calculations and can freeze active hardware modules.","FixedUpdate() updates via a dependable, fixed timer interval independent of raw framerates, preventing unpredictable physics glitches.","FixedUpdate() compresses localized project audio bundles automatically.","Update() refuses execution commands containing raw floating-point data maps."],a:1},
+{q:"What does a 'NullReferenceException' warning code structurally point to in a C# script module?",o:["The hardware platform has exhausted available video VRAM data allocations.","The scripting runtime compiler encountered an infinite loop architecture that halted execution lines.","Your engine instructions are actively trying to access or process an unassigned object memory pointer that references nothing.","The project database architecture was corrupted during an engine version migration event."],a:2},
+{q:"What memory optimization edge does initiating a C# Coroutine provide over traditional update tracking methods?",o:["It forces the core rendering thread to lock step until computations resolve completely.","It handles the serialization of player inventory layouts on data drives.","It yields variable computational logic across subsequent frames, executing asynchronous routines without bottlenecking your active frame sequence.","It executes scripts directly inside the engine's lower-level C++ rendering thread."],a:2},
+{q:"When multiplying variable calculations by 'Time.deltaTime' inside an active Update() loop, what optimization metric is accomplished?",o:["It determines the total execution time elapsed since the initial runtime launch.","It standardizes game values by processing change per second rather than per frame, rendering performance consistent across variable hardware tiers.","It syncs internal software loops directly to the clock configuration speed of the user CPU processor.","It schedules the asset pipeline garbage disposal timing parameters."],a:1}
 ],
 unreal:[
-{q:"GameModeBase?",o:["Rules","Shaders","Audio","UI"],a:0},
-{q:"Nanite?",o:["UI","High poly rendering","Audio","Input"],a:1},
-{q:"Lumen?",o:["Lighting","AI","Physics","UI"],a:0},
-{q:"Blueprint Pure?",o:["No exec pins","Always runs","Deletes","UI"],a:0},
-{q:"PlayerController?",o:["Input system","Audio","UI","Physics"],a:0},
-{q:"Cooking assets?",o:["Optimize build","Increase size","Debug","Render"],a:0},
-{q:"Cast To?",o:["Type check","Render","Move","Delete"],a:0},
-{q:"Level Instance?",o:["Reusable level","Audio","UI","Input"],a:0},
-{q:"UPROPERTY?",o:["Expose to editor","Delete","Render","None"],a:0},
-{q:"Lumen handles?",o:["Lighting","UI","Audio","Save"],a:0}
+{q:"In an Unreal Engine game production architecture, what is the core structural purpose of implementing a custom 'GameModeBase' class?",o:["It manages the definition of game state metrics, enforcement rules, player spawning logic, and default class assignments.","It generates physical terrain deformation colliders.","It establishes master parameter hooks for ray-traced shadow cascades.","It textures environment maps onto localized material assets."],a:0},
+{q:"What core technological solution does Unreal Engine's 'Nanite' geometry system offer to environmental art pipelines?",o:["It converts incoming spatial sound designs into low-latency multi-track arrays.","It virtualizes geometric assets, allowing high-fidelity film models with millions of triangles to render natively without manual polygon reduction.","It manages multi-threaded packaging optimizations across dedicated target machines.","It sequences user interface widgets inside programmatic layout graphs."],a:1},
+{q:"What technical function does a 'Level Instance' perform within Unreal world partitioning workflows?",o:["It cleans old source configuration paths out of localized workspace folders.","It groups actors together into an isolated sub-level asset template that can be instantiated across large environments.","It forces immediate viewport rendering loops down onto low-end host profiles.","It maps cross-play configuration definitions between active clients."],a:1},
+{q:"What structural dynamic feature does the 'Lumen' engine sub-component handle across active rendering loops?",o:["It formats compiling dependencies between localized Blueprints and engine source layers.","It maps skeletal mesh node transformations and bone layout distributions.","It calculates fully dynamic global illumination and high-fidelity real-time light path reflections.","It serializes active player gameplay statistics directly to system drives."],a:2},
+{q:"What transformation takes place during the 'Cooking' phase of building an Unreal Engine project package?",o:["The compiler expands asset resolution fields across 2D asset files.","The engine isolates internal runtime packages by stripping source metadata and formatting assets into platform-ready binaries.","It captures environmental images to build high-definition marketing files.","It profiles processing loops to write debug diagnostics output lists."],a:1},
+{q:"In Blueprint logic creation, what distinguishes a 'Pure Function' node from an 'Impure Executable Function' node?",o:["Pure functions operate exclusively inside C++ script code blocks.","Pure functions contain no execution wire inputs, do not alter data states, and execute instantly upon evaluation to return requested values.","Impure functions immediately flush system memory caches whenever triggered.","Pure functions are limited to handling data streams inside custom materials."],a:1},
+{q:"What architectural role does the 'PlayerController' class fulfill within a standard Unreal logic flow?",o:["It calculates real-time scene layout translations for active environment elements.","It acts as the human-to-game interface, collecting hardware input signals and turning them into actor commands.","It routes multi-channel ambient tracks into the active audio sub-mixer.","It allocates rendering pipelines across available GPU systems."],a:1},
+{q:"When configuring parameters inside a Blueprint variable setup, what does checking the 'Instance Editable' parameter handle?",o:["It permanently writes the value down to protect it from downstream modification.","It exposes that specific property variable to the editor, allowing individual instances of that asset to hold unique configurations.","It translates the asset instance values into volumetric world font actors.","It streams values across backend project cloud services during production."],a:1},
+{q:"In Unreal C++ architectures, what behavior is established by declaring the UPROPERTY(EditAnywhere, BlueprintReadWrite) structural macro?",o:["It tells the base OS to allocate processing priorities exclusively to that variable profile.","It flushes variables directly into an external development logging sheet.","It exposes variables to the Unreal Editor properties panel and opens data access points inside Blueprint graphs.","It writes code protection parameters to block modifications across sub-threads."],a:2},
+{q:"What is the primary technical function of deploying a 'Cast To [Class]' execution node in Blueprints?",o:["It traces direct spatial rays through the world environment to determine surface impacts.","It interrogates an object reference to check if it matches a specific type, granting access to that class's unique parameters and methods.","It outputs a 2D viewport composition over a structural 3D actor layout.","It implements up-scaled processing resolutions using hardware acceleration workflows."],a:1}
 ],
 godot:[
-{q:"Scene system?",o:["Node tree","Array","DB","UI"],a:0},
-{q:"GridMap?",o:["3D tiles","Audio","UI","Physics"],a:0},
-{q:"Transform?",o:["Position","Audio","Memory","Input"],a:0},
-{q:"Viewport?",o:["Render window","Audio","UI","CPU"],a:0},
-{q:"Signals?",o:["Events","Shaders","Physics","UI"],a:0},
-{q:"_ready?",o:["Init","Loop","Delete","Render"],a:0},
-{q:"queue_free?",o:["Delete node","Freeze","Copy","Render"],a:0},
-{q:"Input Map?",o:["Key binding","Audio","UI","Memory"],a:0},
-{q:"_physics_process?",o:["Physics loop","UI","Audio","Render"],a:0},
-{q:"@onready?",o:["Delayed init","Delete","Render","Input"],a:0}
+{q:"What core structural philosophy dictates the arrangement of game objects inside Godot?",o:["A flat array system managed via external tabular definitions.","A deeply nested tree hierarchy comprised entirely of scenes and specialized, single-responsibility Nodes.","A component-heavy metadata model overseen by a separate data processing layer.","An asset workflow where code execution blocks are strictly isolated from render layouts."],a:1},
+{q:"When constructing 3D world infrastructure inside Godot, what specific feature set does the 'GridMap' node expose?",o:["It processes audio volume ranges inside localized coordinate fields.","It updates runtime diagnostic logs to document game engine exceptions.","It gives developers a tile-based layout system to build 3D environments using collections of pre-made meshes.","It orchestrates networking paths for multi-user connections."],a:2},
+{q:"What specific structural parameters are affected when altering the 'Transform' properties of a Spatial/Node3D object?",o:["The weight properties and surface slide friction profiles of the object.","The coordinate tracking indices for Position, Rotation, and Scale relative to the object's parent Node.","The layout resolution dimensions of the engine's main monitor viewport.","The frame execution priority value assigned across active script processes."],a:1},
+{q:"What operational layout is managed by adding a 'SubViewport' node into a Godot active scene tree?",o:["It serves as an automated local backup routine to prevent development file loss.","It tracks active collider physics calculation matrices.","It generates an independent render pass surface, providing isolated display windows for things like split-screen or maps.","It reads hardware device input calls from attached components."],a:2},
+{q:"How does configuring configurations within 'Project Settings > Input Map' alter game input architecture?",o:["It configures multi-threaded operational logic to match processing performance tiers.","It allows developers to map structural actions (like 'move_forward') to multiple alternate hardware buttons simultaneously.","It records play timelines to generate tracking graphs on remote dashboards.","It converts complex 3D visual particles down into lightweight 2D rendering frames."],a:1},
+{q:"At what precise point in an object's execution timeline does the virtual method _ready() trigger?",o:["It executes continuously as part of the frame-by-frame rendering calculations.","It triggers exactly once after the script node and all connected children successfully enter the active scene tree workspace.","It processes data type changes, converting text strings into numeric data points.","It clears unreferenced object references out of core memory allocations."],a:1},
+{q:"Why should delta-based physics processing and movement translation tracking be coded inside _physics_process(delta) rather than _process(delta)?",o:["_process(delta) is locked out from interpreting spatial position calculations or vectors.","_physics_process(delta) updates via a fixed execution loop timer, keeping physics behavior predictable despite framerate drops.","_process(delta) is omitted from standard code validation parses during exports.","_physics_process(delta) routes operations directly onto remote cloud networking modules."],a:1},
+{q:"What event management pattern is established by using 'Signals' within GDScript code architectures?",o:["They monitor system processing units to output temperature alerts.","They pass encrypted telemetry tracking scripts up to server databases.","They handle the observer design pattern, enabling nodes to broadcast event notifications to listening entities without tight dependencies.","They scale viewport layouts down to fit alternate target resolutions."],a:2},
+{q:"What optimization behavior is enforced by placing the @onready structural macro before a variable declaration?",o:["The engine flags variables as read-only constants, blocking changes during runtime.","It stalls variable definition until the target node enters the tree lifecycle, ensuring safe node paths during initialization.","It ports scripts over to optimized secondary processing architectures.","It restricts property visibility to elements located within canvas layer hierarchies."],a:1},
+{q:"What specific hardware memory event is executed when invoking queue_free() on a Godot node object?",o:["The node enters a suspended status but stays inside memory footprints indefinitely.","The node is flagged for safe deletion, removing it and all children cleanly from memory at the closure of the current processing frame.","The object generates a clone of its structural properties in a random coordinate vector.","The call triggers a full reset of the current scene state back to startup parameters."],a:1}
 ]
 };
 
@@ -205,7 +264,7 @@ let user="",engine="",i=0,score=0;
 
 window.nextStep=function(){
     const u=document.getElementById("username").value.trim();
-    if(!u)return alert("Enter username");
+    if(!u)return alert("Please input a valid Discord username to proceed.");
     user=u;
     step("step-identity","step-engine");
 };
@@ -233,7 +292,7 @@ function render(){
 
 window.submit=function(){
     const sel=document.querySelector('input[name="a"]:checked');
-    if(!sel)return alert("Select answer");
+    if(!sel)return alert("Please mark a valid technical parameter before continuing.");
 
     if(parseInt(sel.value)===db[engine][i].a)score++;
 
@@ -245,37 +304,47 @@ window.submit=function(){
 function finish(){
     const pass = score >= 6;
 
-    // 🔥 DISCORD WEBHOOK URL (PUT YOUR LINK HERE)
+    // 🔥 DISCORD WEBHOOK CONFIGURATION
     const webhookUrl = "https://discord.com/api/webhooks/1506694511894466614/F-aK7eQ12dXTzNEr6OTzEPCOqk1owQW8o1whN1i64ziaJHDm5eygQXdfJ-k_0uCH3THD";
 
-    // 📦 DATA SENT TO DISCORD
     const payload = {
         embeds: [{
-            title: pass ? "🟢 PASSED" : "🔴 FAILED",
+            title: pass ? "🟢 GATE VERIFICATION: SUCCESS" : "🔴 GATE VERIFICATION: UNRESOLVED",
             color: pass ? 65280 : 16711680,
             fields: [
-                { name: "User", value: user, inline: true },
-                { name: "Engine", value: engine, inline: true },
-                { name: "Score", value: `${score}/10`, inline: true }
+                { name: "Developer Identity", value: `\`${user}\``, inline: true },
+                { name: "Calibrated Pipeline", value: engine.toUpperCase(), inline: true },
+                { name: "Benchmark Score", value: `**${score}/10**`, inline: true }
             ],
+            footer: { text: "Chuckle Gatekeeper Automation Layer" },
             timestamp: new Date()
         }]
     };
 
-    // 🚀 SEND TO DISCORD
     fetch(webhookUrl, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
     });
 
-    // 🎯 SHOW RESULT ON PAGE
-    document.getElementById("quiz-wrapper").innerHTML =
-        pass
-        ? `<h2 class="section-title">PASSED</h2><p>${user} scored ${score}/10</p>`
-        : `<h2 class="section-title">FAILED</h2><p>${score}/10</p>`;
+    // 🎯 RECONSTRUCTED COMPLETION INTERFACE
+    document.getElementById("quiz-wrapper").innerHTML = `
+        <h2 class="section-title" style="background: linear-gradient(90deg, #a855f7, var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">EVALUATION CONCLUDED</h2>
+        
+        <div class="highlight-box" style="border-left-color: ${pass ? 'var(--blue)' : 'var(--orange)'}; text-align: center; padding: 20px;">
+            <p style="font-size: 1.25rem; font-family: Orbitron, sans-serif; color: #fff;">
+                METRIC COMPILATION: <strong style="color: ${pass ? 'var(--blue)' : 'var(--orange)'};">${score} / 10</strong>
+            </p>
+        </div>
+
+        <p style="text-align: center; font-size: 1.05rem; margin-top: 20px; color: #e2e8f0;">
+            <b>The evaluation sequence has terminated. Please return to the Discord interface.</b>
+        </p>
+        
+        <p style="text-align: center; color: var(--muted); font-size: 0.95rem;">
+            Your dataset has been securely synced via backend protocols. The administration layer is actively reviewing your metrics to authorize access permissions.
+        </p>
+    `;
 }
 
 function step(a,b){
