@@ -243,11 +243,39 @@ window.submit=function(){
 };
 
 function finish(){
-    const pass=score>=6;
-    document.getElementById("quiz-wrapper").innerHTML=
-    pass?
-    `<h2 class="section-title">PASSED</h2><p>${user} scored ${score}/10</p>`:
-    `<h2 class="section-title">FAILED</h2><p>${score}/10</p>`;
+    const pass = score >= 6;
+
+    // 🔥 DISCORD WEBHOOK URL (PUT YOUR LINK HERE)
+    const webhookUrl = "https://discord.com/api/webhooks/1506694511894466614/F-aK7eQ12dXTzNEr6OTzEPCOqk1owQW8o1whN1i64ziaJHDm5eygQXdfJ-k_0uCH3THD";
+
+    // 📦 DATA SENT TO DISCORD
+    const payload = {
+        embeds: [{
+            title: pass ? "🟢 PASSED" : "🔴 FAILED",
+            color: pass ? 65280 : 16711680,
+            fields: [
+                { name: "User", value: user, inline: true },
+                { name: "Engine", value: engine, inline: true },
+                { name: "Score", value: `${score}/10`, inline: true }
+            ],
+            timestamp: new Date()
+        }]
+    };
+
+    // 🚀 SEND TO DISCORD
+    fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+
+    // 🎯 SHOW RESULT ON PAGE
+    document.getElementById("quiz-wrapper").innerHTML =
+        pass
+        ? `<h2 class="section-title">PASSED</h2><p>${user} scored ${score}/10</p>`
+        : `<h2 class="section-title">FAILED</h2><p>${score}/10</p>`;
 }
 
 function step(a,b){
