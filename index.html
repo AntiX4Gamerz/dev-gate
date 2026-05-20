@@ -1,3 +1,8 @@
+Here is the fully updated, single-file source code. I have redesigned the landing screen to introduce the purpose of the gate, outline your channel goals for **Chuckle Games Studio**, and clearly state that a passing score of **6 out of 10** is required to gain entry.
+
+Copy this entire block and paste it directly over everything inside your `index.html` file on GitHub. **Remember to paste your secret Discord Webhook URL on line 150 where it says `YOUR_WEBHOOK_URL_HERE`!**
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,11 +64,30 @@
             margin-bottom: 20px; 
             text-align: center;
         }
+
+        .highlight-box {
+            background: rgba(0, 217, 255, 0.03);
+            border-left: 3px solid var(--blue);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
         
         p { 
             color: var(--text-muted); 
             line-height: 1.6; 
             margin-bottom: 20px; 
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
         
         .input-group { 
@@ -208,20 +232,31 @@
 <body>
 
 <div class="card" id="quiz-wrapper">
-    <!-- STEP 1: IDENTITY -->
+    <!-- STEP 1: WELCOME & PURPOSE -->
     <div id="step-identity">
         <h2 class="section-title">CHUCKLE LABS GATE</h2>
-        <p>Enter your exact Discord username below to initiate the developer verification routing protocol.</p>
+        
+        <p>Welcome to the official entry portal for the Chuckle Games Studio development ecosystem. We designed this verification gate to build a high-quality, spam-free space dedicated strictly to serious game creators, technical artists, and engineers.</p>
+        
+        <div class="highlight-box">
+            <p style="margin-bottom: 0; color: #fff;"><strong>🚀 OUR CHANNEL GOALS:</strong><br>
+            We are working together to foster true collaboration, technical skill sharing, project feedback loops, and to build an active studio environment where developers can genuinely elevate their game production values.</p>
+        </div>
+
+        <p><strong>📋 GATE PARAMETERS:</strong><br>
+        To gain entry and unlock your Discord server roles, you must complete a dynamic technical assessment tracking your engine specialty. You need a minimum passing benchmark score of <strong style="color: var(--yellow);">6 out of 10 (60%)</strong> to pass.</p>
+        
         <div class="input-group">
+            <label for="discord-username"><h3>ENTER YOUR DISCORD USERNAME:</h3></label>
             <input type="text" id="discord-username" placeholder="e.g., gamedev_pro" autocomplete="off">
         </div>
-        <button class="btn" onclick="nextStep('identity')">PROCEED</button>
+        <button class="btn" onclick="nextStep('identity')">PROCEED TO ENGINE SELECTION</button>
     </div>
 
     <!-- STEP 2: ENGINE BRANCHING -->
     <div id="step-engine" class="hidden">
-        <h2 class="section-title">SELECT ENGINE</h2>
-        <p>Choose your native system environment. Your technical quiz parameters will balance dynamically based on your architecture selection.</p>
+        <h2 class="section-title">SELECT SYSTEM ARCHITECTURE</h2>
+        <p>Choose your native game engine workspace. Your assessment parameters will update dynamically to evaluate your specific engineering pipeline.</p>
         <button class="engine-btn" onclick="selectEngine('unity')">🟢 UNITY PIPELINE</button>
         <button class="engine-btn" onclick="selectEngine('unreal')">🔵 UNREAL ENGINE ARCHEPLAY</button>
         <button class="engine-btn" onclick="selectEngine('godot')">🟠 GODOT NODE GRAPH</button>
@@ -336,9 +371,36 @@
 
     function evaluateFinalResults() {
         const box = document.getElementById('quiz-wrapper');
-        const passTarget = 6; // UPDATED PASSING SCORE SYSTEM SET AT 6/10
+        const passTarget = 6; // PASSING SCORE SYSTEM SET AT 6/10
+        const hasPassed = score >= passTarget;
         
-        if (score >= passTarget) {
+        // --- DISCORD WEBHOOK CONFIGURATION ---
+        const webhookUrl = "YOUR_WEBHOOK_URL_HERE"; 
+
+        const payload = {
+            embeds: [{
+                title: hasPassed ? "🟢 DEVELOPER VERIFICATION PASSED" : "🔴 VERIFICATION FAILED",
+                color: hasPassed ? 65280 : 16711680, 
+                fields: [
+                    { name: "Discord Username", value: `\`${userDetails.username}\``, inline: true },
+                    { name: "Engine Pipeline", value: userDetails.engine.toUpperCase(), inline: true },
+                    { name: "Final Score", value: `**${score}/10**`, inline: true }
+                ],
+                footer: { text: "Chuckle Games Studio — Gatekeeper Protocol" },
+                timestamp: new Date()
+            }]
+        };
+
+        if (webhookUrl && webhookUrl !== https://discord.com/api/webhooks/1506694511894466614/F-aK7eQ12dXTzNEr6OTzEPCOqk1owQW8o1whN1i64ziaJHDm5eygQXdfJ-k_0uCH3THD) {
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).catch(err => console.error("Error sending log to Discord:", err));
+        }
+        // --- END OF WEBHOOK CONFIGURATION ---
+
+        if (hasPassed) {
             box.innerHTML = `
                 <h2 class="section-title" style="background: linear-gradient(90deg, #00ffcc, #00d9ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(0,255,200,0.4));">VERIFICATION PASSED</h2>
                 <p>Congratulations <strong>${userDetails.username}</strong>. You successfully scored <strong>${score}/10</strong> inside the <strong>${userDetails.engine.toUpperCase()}</strong> pipeline track.</p>
@@ -355,3 +417,5 @@
 </script>
 </body>
 </html>
+
+```
