@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuckle Dev Verification Gate</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght=500;700;900&family=Inter:wght=300;400;500;600;700&display=swap">
     <style>
         /* CHUCKLE GAMES STUDIO CINEMATIC NEON THEME */
         :root {
@@ -268,6 +267,10 @@
 </div>
 
 <script>
+    // --- CONFIGURE YOUR DISCORD WEBHOOK HERE ---
+    // ALWAYS put double quotation marks around your URL. Leave it empty "" if you don't want to use it yet.
+    const DISCORD_WEBHOOK_URL = ""; 
+
     // TECHNICAL MCQ DATABASE FOR EACH PIPELINE
     const database = {
         unity: [
@@ -367,11 +370,8 @@
 
     function evaluateFinalResults() {
         const box = document.getElementById('quiz-wrapper');
-        const passTarget = 6; // PASSING SCORE SYSTEM SET AT 6/10
+        const passTarget = 6; 
         const hasPassed = score >= passTarget;
-        
-        // --- DISCORD WEBHOOK CONFIGURATION ---
-        const webhookUrl = "YOUR_WEBHOOK_URL_HERE"; 
 
         const payload = {
             embeds: [{
@@ -387,14 +387,14 @@
             }]
         };
 
-        if (webhookUrl && webhookUrl !== https://discord.com/api/webhooks/1506694511894466614/F-aK7eQ12dXTzNEr6OTzEPCOqk1owQW8o1whN1i64ziaJHDm5eygQXdfJ-k_0uCH3THD) {
-            fetch(webhookUrl, {
+        // Simplified webhook processing logic that cannot crash the runtime engine
+        if (typeof DISCORD_WEBHOOK_URL === "string" && DISCORD_WEBHOOK_URL.trim().length > 10) {
+            fetch(DISCORD_WEBHOOK_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
-            }).catch(err => console.error("Error sending log to Discord:", err));
+            }).catch(err => console.error("Webhook processing caught exception:", err));
         }
-        // --- END OF WEBHOOK CONFIGURATION ---
 
         if (hasPassed) {
             box.innerHTML = `
@@ -413,5 +413,3 @@
 </script>
 </body>
 </html>
-
-```
